@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "basic-fintech",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "A minimalistic fintech application built with Nest.js, TypeOrm and Postgres",
   "license": "MIT",
   "scripts": {
     "build": "nest build",
