@@ -20,13 +20,22 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', nullable: false })
+  firstName: string;
+
+  @Column({ type: 'varchar', nullable: false })
+  lastName: string;
+
+  @Column({ type: 'varchar', default: '' })
+  middleName: string;
+
   /**
    * The user's email address
    * @type string
    * @example "abc@basic-fitech.com"
    */
-  @Column({ nullable: true, type: 'varchar' })
-  email: string | null;
+  @Column({ nullable: false, type: 'varchar' })
+  email: string;
 
   /**
    * If the user's email address has been verified
