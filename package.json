@@ -37,10 +37,12 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "decimal.js": "^10.4.3",
+    "dot-object": "^2.1.5",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.5",
