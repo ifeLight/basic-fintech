@@ -58,6 +58,12 @@ export class UserTransaction {
   @Column({ type: 'uuid', nullable: true })
   transferToId?: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  reference?: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  description?: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
