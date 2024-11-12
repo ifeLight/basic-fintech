@@ -34,7 +34,7 @@ export class User {
    * @type string
    * @example "abc@basic-fitech.com"
    */
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'varchar', unique: true })
   email: string;
 
   /**
