@@ -10,18 +10,24 @@ import {
 import type { User } from './user.js';
 
 @Entity()
-export class UserPassword {
+export class UserWallet {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ type: 'uuid' })
   userId: string;
 
+  @Column({ type: 'varchar' })
+  accountNumber: string;
+
   @Column({
     nullable: false,
-    type: 'varchar',
+    type: 'decimal',
+    precision: 12,
+    scale: 2,
+    default: 0,
   })
-  password: string;
+  amount: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -29,7 +35,7 @@ export class UserPassword {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToOne('User', (user: User) => user.password, {
+  @OneToOne('User', (user: User) => user.accountBalance, {
     createForeignKeyConstraints: true,
   })
   @JoinColumn({
