@@ -9,6 +9,11 @@ import { UserController } from './user/user.controller';
 import { WalletController } from './wallet/wallet.controller';
 import { UserService } from './user/user.service';
 import { WalletService } from './wallet/wallet.service';
+import { User } from './entities/user';
+import { UserWallet } from './entities/user-wallet';
+import { UserPassword } from './entities/user-password';
+import { UserTransaction } from './entities/user-transaction';
+import { LastGeneratedAccountNumber } from './entities/last-generate-account-number';
 
 const ConfigModuleReUse = ConfigModule.forRoot({
   load: [configuration],
@@ -26,7 +31,13 @@ const ConfigModuleReUse = ConfigModule.forRoot({
         username: configService.get('database.user'),
         password: configService.get('database.password'),
         database: configService.get('database.name'),
-        entities: [],
+        entities: [
+          User,
+          UserWallet,
+          UserPassword,
+          UserTransaction,
+          LastGeneratedAccountNumber,
+        ],
         synchronize: true,
       }),
       inject: [ConfigService],
