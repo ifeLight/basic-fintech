@@ -7,12 +7,15 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class LastGeneratedAccountNumber {
+export class KeyValue {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
-  @Column({ type: 'varchar' })
-  accountNumber: string;
+  @Column({ nullable: false, unique: true, primary: true })
+  key: string;
+
+  @Column({ type: 'simple-json', nullable: false })
+  value: any;
 
   @CreateDateColumn()
   createdAt: Date;
