@@ -16,7 +16,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "database:dev": "docker compose -f database-dev.yaml up",
+    "database:dev:remove": "docker compose -f database-dev.yaml down"
   },
   "engines": {
     "npm": ">=8.0.0",

@@ -1,0 +1,19 @@
+
+# This file is used to start the database containers
+# It is not used in production only for local development and testing
+
+services:
+    postgres:
+        image: postgres
+        container_name: postgres
+        ports:
+            - '5432:5432'
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=password
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        restart: always
+
+volumes:
+    postgres_data:
