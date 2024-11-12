@@ -10,4 +10,10 @@ export default () => ({
     synchronize: process.env.DATABASE_SYNCHRONIZE === 'true' || true,
     logging: process.env.DATABASE_LOGGING === 'true' || false,
   },
+  jwt: {
+    secret: process.env.JWT
+      ? process.env.JWT_SECRET
+      : 'b8c2f4d8-3c1e-4b4d-8b4d-3c1e4b4d8b4d',
+    expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+  },
 });
