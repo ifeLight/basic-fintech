@@ -57,3 +57,58 @@ export interface IQueryParams {
    */
   search?: string;
 }
+
+/**
+ * The interface of a pagination object
+ */
+export interface IPagination {
+  /**
+   * The page number
+   * @format int32
+   * @example 1
+   */
+  page: number;
+  /**
+   * The limit of the number of items to return
+   * @format int32
+   * @example 10
+   */
+  limit: number;
+  /**
+   * The total number of items
+   * @format int32
+   * @example 40
+   */
+  total: number;
+  /**
+   * The total number of pages
+   * @format int32
+   * @example 4
+   */
+  pages: number;
+  /**
+   * The previous page number, null if there is no previous page
+   * @format int32
+   * @example 1
+   * @example null
+   */
+  prevPage?: number | null;
+  /**
+   * The next page number, null if there is no next page
+   * @format int32
+   * @example 3
+   * @example null
+   */
+  nextPage?: number | null;
+}
+
+export interface IPaginationData<T> {
+  /**
+   * The pagination object
+   */
+  pagination: IPagination;
+  /**
+   * The data array
+   */
+  data: T[];
+}
