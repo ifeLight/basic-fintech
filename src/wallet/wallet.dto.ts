@@ -1,3 +1,4 @@
+import { IsNumberString, IsString, Length } from 'class-validator';
 import { TransactionStatus, TransactionType } from 'src/entities/interfaces';
 
 export class CreateUserTransactionDto {
@@ -9,4 +10,14 @@ export class CreateUserTransactionDto {
   transferFromId?: string;
   reference?: string;
   description?: string;
+}
+
+export class FundUserWalletDto {
+  @IsString()
+  @Length(10)
+  accountNumber: string;
+
+  @IsString()
+  @IsNumberString()
+  amount: string;
 }

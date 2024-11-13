@@ -46,6 +46,7 @@ export class WalletService {
 
   async getTransaction(
     transactionId: string,
+    userId?: string,
     txnManager?: EntityManager,
   ): Promise<UserTransaction> {
     const manager = txnManager || this.dataSource.manager;
@@ -53,10 +54,12 @@ export class WalletService {
       ? { transferFrom: true, transferTo: true }
       : {};
     const extraOptions: FindOneOptions<UserTransaction> = txnManager
-      ? { lock: { mode: 'pessimistic_read' } }
+      ? { lock: { mode: 'pessimistic_write' } }
       : {};
+    const extraWhere: FindOptionsWhere<UserTransaction> = {};
+    if (userId) extraWhere['userId'] = userId;
     const userTransaction = await manager.findOne(UserTransaction, {
-      where: { id: transactionId },
+      where: { id: transactionId, ...extraWhere },
       ...relations,
       ...extraOptions,
     });
