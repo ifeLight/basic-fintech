@@ -16,14 +16,13 @@ import {
   FindOptionsRelations,
   FindOptionsWhere,
 } from 'typeorm';
-import { CreateUserTransactionDto } from './wallet.dto';
+import { CreateUserTransactionDto, TransactionQuery } from './wallet.dto';
 import { UserTransaction } from 'src/entities/user-transaction';
 import {
-  IPaginationData,
+  PaginationData,
   TransactionStatus,
   TransactionType,
 } from 'src/entities/interfaces';
-import { ITransactionQuery } from './wallet.interface';
 import { getDocuments } from 'src/utils/database';
 
 @Injectable()
@@ -71,12 +70,16 @@ export class WalletService {
 
   async listTransactions(
     userId: string,
-    query: ITransactionQuery,
-  ): Promise<IPaginationData<UserTransaction>> {
-    const { type, status, startDate, endDate } = query;
+    query: TransactionQuery,
+  ): Promise<PaginationData<UserTransaction>> {
+    const { type, status, startDate, endDate, amount } = query;
     const extraWhere: FindOptionsWhere<UserTransaction> = {};
     if (type) extraWhere['type'] = type;
     if (status) extraWhere['status'] = status;
+    if (amount) {
+      const amountValue = new Decimal(amount).toFixed(2);
+      extraWhere['amount'] = amountValue;
+    }
     if (startDate || endDate) {
       const startDateValue = startDate ? new Date(startDate) : new Date(0);
       const endDateValue = endDate ? new Date(endDate) : new Date();
