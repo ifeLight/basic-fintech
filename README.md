@@ -99,22 +99,22 @@ A racing condition occurs when multiple concurrent processes or threads attempt 
 
 ### Real-World Fintech Example: Double Spend
 
-Imagine a scenario where two users, Alice and Bob, both have accounts in a mobile payment application. Alice wants to transfer $100 to Bob. Here's how a racing condition could lead to problems:
+Imagine a scenario where two users, Ifedayo and Iyabo, both have accounts in a mobile payment application. Ifedayo wants to transfer ₦1,000 to Iyabo. Here's how a racing condition could lead to problems:
 
-1. **Read Balance:** Both Alice and Bob's application read their respective account balances simultaneously.
+1. **Read Balance:** Both Ifedayo and Iyabo's application read their respective account balances simultaneously.
 
-2. **Insufficient Funds Check:** Both applications independently verify that Alice has sufficient funds ($100) for the transfer.
+2. **Insufficient Funds Check:** Both applications independently verify that Ifedayo has sufficient funds (₦1,000) for the transfer.
 
 3. **Race Condition:** Due to the asynchronous nature of communication, there's a chance both applications might finish step 2 (verifying funds) at nearly the same time.
 
-4. **Potential Double Debit** Now, both applications attempt to deduct $100 from Alice's account and credit Bob's account.
+4. **Potential Double Debit** Now, both applications attempt to deduct ₦1,000 from Ifedayo's account and credit Iyabo's account.
 
 Without proper handling of concurrent access, this can lead to a situation where:
 
-- Alice's account is debited twice (once for each application).
-- Bob receives $100 only once (credited by only one application).
+- Ifedayo's account is debited twice (once for each application).
+- Iyabo receives ₦1,000 only once (credited by only one application).
 
-This results in a "double spend" scenario, where Alice loses $100 and Bob gains only $100, causing a financial discrepancy.
+This results in a "double spend" scenario, where Ifedayo loses ₦1,000 and Iyabo gains only ₦1,000, causing a financial discrepancy.
 
 ### Mitigating Racing Conditions with Transactions
 
