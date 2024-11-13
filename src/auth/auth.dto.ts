@@ -19,3 +19,12 @@ export class UserLoginDto {
   })
   password: string;
 }
+
+export class TokenResponseDto {
+  @ApiProperty({
+    description: 'The access token',
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+    type: String,
+  })
+  accessToken: string;
+}
