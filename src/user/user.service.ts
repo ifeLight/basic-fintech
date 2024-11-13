@@ -7,10 +7,11 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DataSource, FindOptionsRelations, Repository } from 'typeorm';
-import bcrypt from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 import { User } from 'src/entities/user';
 import { CreateUserDto } from './user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserPassword } from 'src/entities/user-password';
 
 @Injectable()
 export class UserService {
@@ -33,10 +34,11 @@ export class UserService {
       middleName: userData.middleName,
     });
     await this.userRepository.save(user);
-    await this.dataSource.manager.save({
+    const password = this.dataSource.manager.create(UserPassword, {
       userId: user.id,
-      password: await bcrypt.hash(userData.password, 10),
+      password: await hash(userData.password, 10),
     });
+    await this.dataSource.manager.save(password);
     return user;
   }
 
@@ -47,10 +49,7 @@ export class UserService {
     const user = await this.getUserByEmail(email, true);
     if (!user) throw new UnauthorizedException('Invalid email or password');
     if (!user.password) throw new InternalServerErrorException();
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user.password.password,
-    );
+    const isPasswordValid = await compare(password, user.password.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
