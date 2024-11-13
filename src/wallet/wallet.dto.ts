@@ -1,6 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumberString, IsString, Length } from 'class-validator';
-import { TransactionStatus, TransactionType } from 'src/entities/interfaces';
+import {
+  QueryParams,
+  TransactionStatus,
+  TransactionType,
+} from '../entities/interfaces';
 
 export class CreateUserTransactionDto {
   userId: string;
@@ -33,4 +37,46 @@ export class FundUserWalletDto {
     type: String,
   })
   amount: string;
+}
+
+export class TransactionQuery extends QueryParams {
+  @ApiProperty({
+    description: 'The start date',
+    example: '2021-01-01',
+    type: String,
+    required: false,
+  })
+  startDate?: string;
+
+  @ApiProperty({
+    description: 'The end date',
+    example: '2021-01-01',
+    type: String,
+    required: false,
+  })
+  endDate?: string;
+
+  @ApiProperty({
+    description: 'The transaction status',
+    example: 'pending',
+    type: String,
+    required: false,
+  })
+  status?: TransactionStatus;
+
+  @ApiProperty({
+    description: 'The transaction type',
+    example: 'credit',
+    type: String,
+    required: false,
+  })
+  type?: TransactionType;
+
+  @ApiProperty({
+    description: 'The transaction amount',
+    example: '1000',
+    type: String,
+    required: false,
+  })
+  amount?: string;
 }

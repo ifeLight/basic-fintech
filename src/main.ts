@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('Basic Fintech API')
     .setDescription('The basic fintech API description')
     .setVersion('1.0')
+    .addBearerAuth()
     // .addTag('cats')
     .build();
   const documentFactory = () => {

@@ -1,3 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export enum TransactionStatus {
   PENDING = 'pending',
   SUCCCESS = 'success',
@@ -110,5 +112,91 @@ export interface IPaginationData<T> {
   /**
    * The data array
    */
+  data: T[];
+}
+
+export class QueryParams implements IQueryParams {
+  @ApiProperty({
+    description: 'The page number',
+    example: 1,
+    type: Number,
+    required: false,
+  })
+  page?: number;
+
+  @ApiProperty({
+    description: 'The limit of the number of items to return',
+    example: 10,
+    type: Number,
+    required: false,
+  })
+  limit?: number;
+
+  @ApiProperty({
+    description: 'The sort order',
+    example: 'asc',
+    type: String,
+    required: false,
+  })
+  sort?: QuerySortOrder;
+
+  @ApiProperty({
+    description: 'The field to sort by',
+    example: 'createdAt',
+    type: String,
+    required: false,
+  })
+  orderBy?: string;
+
+  @ApiProperty({
+    description: 'The search query',
+    example: 'John',
+    type: String,
+    required: false,
+  })
+  search?: string;
+}
+
+export class Pagination implements IPagination {
+  @ApiProperty({
+    description: 'The page number',
+    example: 1,
+    type: Number,
+  })
+  page: number;
+  @ApiProperty({
+    description: 'The limit of the number of items to return',
+    example: 10,
+    type: Number,
+  })
+  limit: number;
+  @ApiProperty({
+    description: 'The total number of items',
+    example: 40,
+    type: Number,
+  })
+  total: number;
+  @ApiProperty({
+    description: 'The total number of pages',
+    example: 4,
+    type: Number,
+  })
+  pages: number;
+  @ApiProperty({
+    description: 'The previous page number, null if there is no previous page',
+    example: 1,
+    type: Number || null,
+  })
+  prevPage?: number | null;
+  @ApiProperty({
+    description: 'The next page number, null if there is no next page',
+    example: 3,
+    type: Number || null,
+  })
+  nextPage?: number | null;
+}
+
+export class PaginationData<T> implements IPaginationData<T> {
+  pagination: Pagination;
   data: T[];
 }

@@ -20,10 +20,9 @@ import {
 import { WalletService } from './wallet.service';
 import { UserWallet } from '../entities/user-wallet';
 import { UserTransaction } from '../entities/user-transaction';
-import { ITransactionQuery } from './wallet.interface';
-import { IPaginationData } from '../entities/interfaces';
+import { PaginationData } from '../entities/interfaces';
 import { AuthGuard } from '../auth/auth.guard';
-import { FundUserWalletDto } from './wallet.dto';
+import { FundUserWalletDto, TransactionQuery } from './wallet.dto';
 
 @ApiTags('Wallet')
 @Controller('wallet')
@@ -31,7 +30,11 @@ export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
   @ApiOperation({ summary: 'Get User Wallet' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Wallet' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Wallet',
+    type: UserWallet,
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get()
@@ -41,7 +44,11 @@ export class WalletController {
   }
 
   @ApiOperation({ summary: 'Get Transaction By ID' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Transaction' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Transaction',
+    type: UserTransaction,
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('transaction/:id')
@@ -54,21 +61,28 @@ export class WalletController {
   }
 
   @ApiOperation({ summary: 'Get User Transactions' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Transactions' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Transactions',
+    type: PaginationData<UserTransaction>,
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('transactions')
   async getTransactions(
     @Request() req: express.Request,
-    @Query() query: ITransactionQuery,
-  ): Promise<IPaginationData<UserTransaction>> {
+    @Query() query: TransactionQuery,
+  ): Promise<PaginationData<UserTransaction>> {
     const userId: string = req['user'].sub;
     return await this.walletService.listTransactions(userId, query);
   }
 
   @ApiOperation({ summary: 'Fund User Wallet' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Transaction' })
-  @ApiBearerAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Transaction',
+    type: UserTransaction,
+  })
   @HttpCode(HttpStatus.OK)
   @Post('fund')
   async fundUserWallet(
