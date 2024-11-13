@@ -42,7 +42,6 @@ export class FundUserWalletDto {
 export class TransactionQuery extends QueryParams {
   @ApiProperty({
     description: 'The start date',
-    example: '2021-01-01',
     type: String,
     required: false,
   })
@@ -50,7 +49,6 @@ export class TransactionQuery extends QueryParams {
 
   @ApiProperty({
     description: 'The end date',
-    example: '2021-01-01',
     type: String,
     required: false,
   })
@@ -58,23 +56,24 @@ export class TransactionQuery extends QueryParams {
 
   @ApiProperty({
     description: 'The transaction status',
-    example: 'pending',
+    example: TransactionStatus.SUCCCESS,
     type: String,
     required: false,
+    enum: TransactionStatus,
   })
   status?: TransactionStatus;
 
   @ApiProperty({
     description: 'The transaction type',
-    example: 'credit',
+    example: TransactionType.DEPOSIT,
     type: String,
     required: false,
+    enum: TransactionType,
   })
   type?: TransactionType;
 
   @ApiProperty({
     description: 'The transaction amount',
-    example: '1000',
     type: String,
     required: false,
   })
