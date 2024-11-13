@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate {
     }
     let token: string;
     if (tokenFromAuthHeader.startsWith('Bearer ')) {
-      token = tokenFromAuthHeader.split(' ')[1];
+      token = tokenFromAuthHeader.split(' ')[1].trim();
     } else {
       token = tokenFromAuthHeader;
     }
