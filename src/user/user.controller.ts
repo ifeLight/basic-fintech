@@ -6,7 +6,12 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { User } from '../entities/user';
@@ -18,6 +23,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Get User Profile' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User Profile' })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('profile')
   async getProfile(@Request() req: express.Request): Promise<User> {

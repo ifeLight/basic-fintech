@@ -11,7 +11,12 @@ import {
   Post,
   HttpCode,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { WalletService } from './wallet.service';
 import { UserWallet } from '../entities/user-wallet';
 import { UserTransaction } from '../entities/user-transaction';
@@ -27,6 +32,7 @@ export class WalletController {
 
   @ApiOperation({ summary: 'Get User Wallet' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User Wallet' })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get()
   async getWallet(@Request() req: express.Request): Promise<UserWallet> {
@@ -36,6 +42,7 @@ export class WalletController {
 
   @ApiOperation({ summary: 'Get Transaction By ID' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User Transaction' })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('transaction/:id')
   async getTRansactionById(
@@ -48,6 +55,7 @@ export class WalletController {
 
   @ApiOperation({ summary: 'Get User Transactions' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User Transactions' })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('transactions')
   async getTransactions(
@@ -60,6 +68,7 @@ export class WalletController {
 
   @ApiOperation({ summary: 'Fund User Wallet' })
   @ApiResponse({ status: HttpStatus.OK, description: 'User Transaction' })
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   @Post('fund')
   async fundUserWallet(
@@ -72,7 +81,12 @@ export class WalletController {
   }
 
   @ApiOperation({ summary: 'Transfer Funds' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Transaction' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Transaction',
+    type: UserTransaction,
+  })
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   @Post('transfer')
   async transferFunds(
