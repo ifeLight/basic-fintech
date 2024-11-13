@@ -11,8 +11,8 @@ import {
   IQueryParams,
   IPagination,
   IPaginationData,
-} from 'src/entities/interfaces.js';
-import { QuerySortOrder } from 'src/entities/interfaces.js';
+} from '../entities/interfaces';
+import { QuerySortOrder } from '../entities/interfaces';
 import { validateUUID } from './uuid';
 
 export interface IGetDocumentOptions<T> {

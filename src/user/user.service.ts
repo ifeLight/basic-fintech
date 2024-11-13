@@ -10,12 +10,14 @@ import { DataSource, FindOptionsRelations, Repository } from 'typeorm';
 import bcrypt from 'bcrypt';
 import { User } from 'src/entities/user';
 import { CreateUserDto } from './user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UserService {
   constructor(
     private configService: ConfigService,
     private dataSource: DataSource,
+    @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
 
