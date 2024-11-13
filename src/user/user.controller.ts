@@ -22,7 +22,11 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({ summary: 'Get User Profile' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'User Profile' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User Profile',
+    type: User,
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @Get('profile')

@@ -11,19 +11,26 @@ import {
   AfterUpdate,
 } from 'typeorm';
 import Decimal from 'decimal.js';
-import type { User } from './user.js';
+import { User } from './user.js';
 import {
   TransactionFlow,
   TransactionStatus,
   TransactionType,
 } from './interfaces.js';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class UserTransaction {
   @PrimaryGeneratedColumn('uuid')
+  @ApiProperty({
+    description: 'The ID of transaction',
+    example: 'asdf-asdfg-asdf-sdf',
+    type: 'string',
+  })
   id: string;
 
   @Column({ type: 'uuid' })
+  @ApiProperty()
   userId: string;
 
   @Column({
@@ -33,15 +40,25 @@ export class UserTransaction {
     scale: 2,
     default: 0,
   })
+  @ApiProperty()
   amount: string;
 
   @Column({ type: 'varchar', nullable: false })
+  @ApiProperty({
+    enum: TransactionType,
+  })
   type: TransactionType;
 
   @Column({ type: 'varchar', nullable: false })
+  @ApiProperty({
+    enum: TransactionStatus,
+  })
   status: TransactionStatus;
 
-  flow: string;
+  @ApiProperty({
+    enum: TransactionFlow,
+  })
+  flow: TransactionFlow;
 
   @AfterLoad()
   @AfterUpdate()
@@ -58,15 +75,28 @@ export class UserTransaction {
   @Column({ type: 'uuid', nullable: true })
   transferToId?: string;
 
+  @ApiProperty({
+    required: false,
+  })
   @Column({ type: 'varchar', nullable: true })
   reference?: string;
 
+  @ApiProperty({
+    required: false,
+  })
   @Column({ type: 'varchar', nullable: true })
   description?: string;
 
+  @ApiProperty({
+    type: 'string',
+  })
   @CreateDateColumn()
   createdAt: Date;
 
+  @ApiProperty({
+    type: User,
+    required: false,
+  })
   @ManyToOne('User', (user: User) => user.transactions, {
     createForeignKeyConstraints: false,
   })
@@ -76,6 +106,10 @@ export class UserTransaction {
   })
   user?: User;
 
+  @ApiProperty({
+    type: User,
+    required: false,
+  })
   @OneToOne('User', {
     createForeignKeyConstraints: false,
   })
@@ -85,6 +119,10 @@ export class UserTransaction {
   })
   transferFrom?: User;
 
+  @ApiProperty({
+    type: User,
+    required: false,
+  })
   @OneToOne('User', {
     createForeignKeyConstraints: false,
   })

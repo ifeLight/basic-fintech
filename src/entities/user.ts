@@ -6,6 +6,7 @@ import {
   OneToOne,
   OneToMany,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 import type { UserWallet } from './user-wallet';
 import type { UserPassword } from './user-password';
 import type { UserTransaction } from './user-transaction';
@@ -17,39 +18,59 @@ export class User {
    * @type string
    * @example "f7b1b1b1-1b1b-1b1b-1b1b-1b1b1b1b1b1b"
    */
+  @ApiProperty({
+    example: 'f7b1b1b1-1b1b-1b1b-1b1b-1b1b1b1b1b1b',
+    type: 'string',
+    description: 'The user unique identifier',
+  })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty({
+    example: 'John',
+    description: 'The user first name',
+    type: 'string',
+  })
   @Column({ type: 'varchar', nullable: false })
   firstName: string;
 
+  @ApiProperty({
+    example: 'Doe',
+    description: 'The user last name',
+    type: 'string',
+  })
   @Column({ type: 'varchar', nullable: false })
   lastName: string;
 
+  @ApiProperty({
+    example: 'John',
+    description: 'The user middle name',
+    type: 'string',
+  })
   @Column({ type: 'varchar', default: '' })
   middleName: string;
 
-  /**
-   * The user's email address
-   * @type string
-   * @example "abc@basic-fitech.com"
-   */
+  @ApiProperty({
+    example: 'abc@mail.com',
+    description: 'The user email address',
+    type: 'string',
+  })
   @Column({ nullable: false, type: 'varchar', unique: true })
   email: string;
 
-  /**
-   * If the user's email address has been verified
-   * @type boolean
-   * @example true
-   */
+  @ApiProperty({
+    example: false,
+    description: 'The user email verification status',
+    type: 'boolean',
+  })
   @Column({ nullable: false, default: false })
   emailVerified: boolean;
 
-  /**
-   * The date the user joined the platform
-   * @type Date
-   * @example "2021-01-01T00:00:00.000Z"
-   */
+  @ApiProperty({
+    example: '2021-01-01T00:00:00.000Z',
+    description: 'The date the user joined the platform',
+    type: 'string',
+  })
   @CreateDateColumn()
   createdAt: Date;
 
