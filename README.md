@@ -4,11 +4,21 @@ This is a minimalistic fintech application built with NestJS and TypeORM, using 
 
 ## Getting Started
 
+### Technologies Used
+
+- [NestJS](https://nestjs.com/) - A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+- [TypeORM](https://typeorm.io/) - An ORM that can run in NodeJS and can be used with TypeScript and JavaScript.
+- [PostgreSQL](https://www.postgresql.org/) - A powerful, open-source object-relational database system.
+- [Swagger](https://swagger.io/) - An open-source software framework backed by a large ecosystem of tools that helps developers design, build, document, and consume RESTful web services.
+- [Docker](https://www.docker.com/) - A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+- JWT - JSON Web Tokens are an open, industry-standard RFC 7519 method for representing claims securely between two parties.
+
 ### Prerequisites
 
 - Node.js (v16 or later) - Available on [Node.js website](https://nodejs.org/)
 - npm (or yarn) - Available on [npm website](https://www.npmjs.com/) or [yarn website](https://yarnpkg.com/)
 - PostgreSQL - Available on [PostgreSQL website](https://www.postgresql.org/)
+- Docker (optional) - Available on [Docker website](https://www.docker.com/)
 
 ### Installation
 
