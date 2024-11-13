@@ -6,7 +6,7 @@ import {
   EntityTarget,
   Equal,
 } from 'typeorm';
-import dot from 'dot-object';
+import { str, object } from 'dot-object';
 import {
   IQueryParams,
   IPagination,
@@ -42,7 +42,7 @@ export const getDocuments = async function <T extends ObjectLiteral>(
       const obj = {
         ...addExtraWhere,
       };
-      dot.str(field, ILike(`%${search}%`), obj);
+      str(field, ILike(`%${search}%`), obj);
       searchWhere.push(obj);
     }
   }
@@ -52,7 +52,7 @@ export const getDocuments = async function <T extends ObjectLiteral>(
         const obj = {
           ...addExtraWhere,
         };
-        dot.str(field, Equal(search), obj);
+        str(field, Equal(search), obj);
         searchWhere.push(obj);
       }
     }
@@ -64,7 +64,7 @@ export const getDocuments = async function <T extends ObjectLiteral>(
   const order: any = query?.orderBy
     ? { [query.orderBy]: query.sort || QuerySortOrder.DESC }
     : {};
-  dot.object(order);
+  object(order);
   const [data, total] = await manager.findAndCount(entity, {
     skip,
     take,

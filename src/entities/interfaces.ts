@@ -134,9 +134,10 @@ export class QueryParams implements IQueryParams {
 
   @ApiProperty({
     description: 'The sort order',
-    example: 'asc',
+    example: QuerySortOrder.DESC,
     type: String,
     required: false,
+    enum: QuerySortOrder,
   })
   sort?: QuerySortOrder;
 
@@ -150,7 +151,6 @@ export class QueryParams implements IQueryParams {
 
   @ApiProperty({
     description: 'The search query',
-    example: 'John',
     type: String,
     required: false,
   })
@@ -196,7 +196,15 @@ export class Pagination implements IPagination {
   nextPage?: number | null;
 }
 
-export class PaginationData<T> implements IPaginationData<T> {
+export class PaginationData<T extends object> implements IPaginationData<T> {
+  @ApiProperty({
+    description: 'The pagination object',
+    type: Pagination,
+  })
   pagination: Pagination;
+  @ApiProperty({
+    description: 'The data array',
+    type: Array<T>,
+  })
   data: T[];
 }
