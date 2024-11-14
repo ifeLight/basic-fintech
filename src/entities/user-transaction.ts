@@ -11,12 +11,12 @@ import {
   AfterUpdate,
 } from 'typeorm';
 import Decimal from 'decimal.js';
-import { User } from './user.js';
+import { User } from './user';
 import {
   TransactionFlow,
   TransactionStatus,
   TransactionType,
-} from './interfaces.js';
+} from './interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()

@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import type { User } from './user.js';
+import type { User } from './user';
 
 @Entity()
 export class UserPassword {

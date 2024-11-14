@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import type { User } from './user.js';
+import type { User } from './user';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()

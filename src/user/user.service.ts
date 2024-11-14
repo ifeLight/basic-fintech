@@ -8,10 +8,10 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { DataSource, FindOptionsRelations, Repository } from 'typeorm';
 import { hash, compare } from 'bcrypt';
-import { User } from 'src/entities/user';
+import { User } from '../entities/user';
 import { CreateUserDto } from './user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserPassword } from 'src/entities/user-password';
+import { UserPassword } from '../entities/user-password';
 
 @Injectable()
 export class UserService {
