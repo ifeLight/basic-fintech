@@ -5,9 +5,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import Decimal from 'decimal.js';
-import { KeyValue } from 'src/entities/key-value';
-import { UserWallet } from 'src/entities/user-wallet';
 import {
   Between,
   DataSource,
@@ -16,14 +13,17 @@ import {
   FindOptionsRelations,
   FindOptionsWhere,
 } from 'typeorm';
+import Decimal from 'decimal.js';
+import { KeyValue } from '../entities/key-value';
+import { UserWallet } from '../entities/user-wallet';
 import { CreateUserTransactionDto, TransactionQuery } from './wallet.dto';
-import { UserTransaction } from 'src/entities/user-transaction';
+import { UserTransaction } from '../entities/user-transaction';
 import {
   PaginationData,
   TransactionStatus,
   TransactionType,
-} from 'src/entities/interfaces';
-import { getDocuments } from 'src/utils/database';
+} from '../entities/interfaces';
+import { getDocuments } from '../utils/database';
 
 @Injectable()
 export class WalletService {
