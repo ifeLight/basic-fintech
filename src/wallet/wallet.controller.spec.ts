@@ -7,7 +7,6 @@ describe('WalletController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await getTestingModule();
-
     controller = module.get<WalletController>(WalletController);
   });
 
