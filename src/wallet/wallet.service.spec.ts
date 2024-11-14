@@ -141,8 +141,6 @@ describe('UserService', () => {
         expect(result).toHaveProperty('id');
         expect(result).toHaveProperty('userId', user1.id);
         expect(result).toHaveProperty('amount');
-        console.log('amount', amount);
-        console.log('result', result);
         expect(new Decimal(result.amount).negated().eq(amount)).toBeTruthy();
         expect(result).toHaveProperty('status', TransactionStatus.SUCCCESS);
         expect(result).toHaveProperty('type', TransactionType.TRANSFER_OUT);
