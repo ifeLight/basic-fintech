@@ -9,6 +9,13 @@ export default () => ({
     user: process.env.DATABASE_USER || 'root',
     synchronize: process.env.DATABASE_SYNCHRONIZE === 'true' || true,
     logging: process.env.DATABASE_LOGGING === 'true' || false,
+    test: {
+      host: process.env.DATABASE_TEST_HOST || 'localhost',
+      port: parseInt(process.env.DATABASE_TEST_PORT, 10) || 5432,
+      name: process.env.DATABASE_TEST_NAME || 'basic_fintech_test',
+      password: process.env.DATABASE_TEST_PASSWORD || 'password',
+      user: process.env.DATABASE_TEST_USER || 'root',
+    },
   },
   jwt: {
     secret: process.env.JWT

@@ -49,6 +49,7 @@ DATABASE_SYNCHRONIZE=true
 DATABASE_LOGGING=false
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=1d
+DATABASE_TEST_NAME=basic_fintech_test
 ```
 
 Note: Replace `your_username`, `your_password`, and `your_jwt_secret` with your own values.
@@ -62,6 +63,16 @@ npm run start
 The application should now be running on `http://localhost:3000`.
 
 You can access the API documentation at `http://localhost:3000/docs`.
+
+## Testing
+
+To run the tests for this application, ensure you have created a test database and set the `DATABASE_TEST_NAME` environment variable in the `.env` file.
+
+You can then run the tests using the following command:
+
+```bash
+npm run test
+```
 
 ## Deployment
 
