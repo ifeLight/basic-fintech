@@ -70,7 +70,7 @@ export class WalletService {
 
   async listTransactions(
     userId: string,
-    query: TransactionQuery,
+    query: TransactionQuery = {},
   ): Promise<PaginationData<UserTransaction>> {
     const { type, status, startDate, endDate, amount } = query;
     const extraWhere: FindOptionsWhere<UserTransaction> = {};
